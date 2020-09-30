@@ -8,9 +8,10 @@ import web.project.seok.dto.BoardDto;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class BoardService implements BoardServiceInter{
+public class BoardService implements BoardServiceInter {
 
     private final BoardRepository boardRepository;
 
@@ -28,11 +29,11 @@ public class BoardService implements BoardServiceInter{
     @Override
     @Transactional
     public List<BoardDto> getBoardlist() {
-        List<Board> boards=boardRepository.findAll();
-        List<BoardDto> boardDtoList=new ArrayList<>();
+        List<Board> boards = boardRepository.findAll();
+        List<BoardDto> boardDtoList = new ArrayList<>();
 
-        for(Board board:boards){
-            BoardDto dto=new BoardDto().builder()
+        for (Board board : boards) {
+            BoardDto dto = new BoardDto().builder()
                     .id(board.getId())
                     .title(board.getTitle())
                     .content(board.getContent())
@@ -42,5 +43,22 @@ public class BoardService implements BoardServiceInter{
             boardDtoList.add(dto);
         }
         return boardDtoList;
+    }
+
+    @Override
+    public BoardDto getPost(Long id) {
+        Optional<Board> boardWrapper = boardRepository.findById(id);
+        Board board = boardWrapper.get();
+
+        BoardDto dto = BoardDto.builder()
+                .id(board.getId())
+                .title(board.getTitle())
+                .content(board.getContent())
+                .writer(board.getWriter())
+                .createdDate(board.getCreatedDate())
+                .build();
+
+        return dto;
+
     }
 }
