@@ -13,6 +13,7 @@ import javax.persistence.Id;
 
 @Getter
 @Entity
+//파라미터 없는 기본 생성자 생성- protected 접근
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Board extends TimeEntity{
 

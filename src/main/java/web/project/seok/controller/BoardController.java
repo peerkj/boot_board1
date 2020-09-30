@@ -1,10 +1,13 @@
 package web.project.seok.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import web.project.seok.dto.BoardDto;
 import web.project.seok.service.BoardService;
+
+import java.util.List;
 
 @Controller
 public class BoardController {
@@ -16,9 +19,12 @@ public class BoardController {
     }
 
     @GetMapping("/")
-    public String list(){
-        return "board/list";
+    public String list(Model model){
+        List<BoardDto> dtoList=boardService.getBoardlist();
+        model.addAttribute("boardList",dtoList);
+        return "board/list.html";
     }
+
     @GetMapping("/post")
     public String write(){
         return "board/write";
