@@ -7,10 +7,12 @@ import java.util.List;
 
 public interface BoardServiceInter {
     public void savePost(BoardDto dto);
-    List<BoardDto> getBoardlist();
+    List<BoardDto> getBoardlist(Integer pageNum);
     BoardDto getPost(Long id);
     void deletePost(Long id);
 
     List<BoardDto> searchPosts(String keyword);
     BoardDto convertEntityToDto(Board board);
+
+    Integer[] getPageList(Integer pageNum);
 }
