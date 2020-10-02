@@ -22,7 +22,7 @@ public class BoardService implements BoardServiceInter {
     @Override
     @Transactional
     public void savePost(BoardDto dto) {
-        boardRepository.save(dto.toEntity()).getId();
+        boardRepository.save(dto.toEntity());
     }
 
 
@@ -60,5 +60,10 @@ public class BoardService implements BoardServiceInter {
 
         return dto;
 
+    }
+
+    @Override
+    public void deletePost(Long id) {
+        boardRepository.deleteById(id);
     }
 }
