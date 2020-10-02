@@ -2,10 +2,15 @@ Spring Boot + JPA
 
 
 개발환경
+
 IDEA : IntelliJ
+
 Java:11
+
 Spring Boot
+
 Gradle
+
 docker - mysql 사용
 
 
