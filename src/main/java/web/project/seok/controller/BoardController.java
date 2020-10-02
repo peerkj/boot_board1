@@ -21,7 +21,7 @@ public class BoardController {
     public String list(Model model){
         List<BoardDto> dtoList=boardService.getBoardlist();
         model.addAttribute("boardList",dtoList);
-        return "board/list.html";
+        return "board/list";
     }
 
     @GetMapping("/post")
@@ -39,21 +39,21 @@ public class BoardController {
     public String detail(@PathVariable("no") Long id,Model model){
         BoardDto dto=boardService.getPost(id);
         model.addAttribute("boardDto",dto);
-        return "board/detail.html";
+        return "board/detail";
     }
 
     @GetMapping("/post/edit/{no}")
     public String edit(@PathVariable("no") Long id,Model model){
         BoardDto dto=boardService.getPost(id);
         model.addAttribute("boardDto",dto);
-        return "board/update.html";
+        return "board/update";
     }
 
     @PutMapping("/post/edit/{no}")
     public String update(BoardDto dto,Model model){
         boardService.savePost(dto);
         model.addAttribute("boardDto",dto);
-        return "board/detail.html";
+        return "board/detail";
     }
     @DeleteMapping("/post/{no}")
     public String delete(@PathVariable("no") Long id){
@@ -61,4 +61,14 @@ public class BoardController {
 
         return "redirect:/";
     }
+
+    @GetMapping("/board/search")
+    public String search(@RequestParam(value="keyword") String keyword,Model model){
+
+        List<BoardDto> boardDtos = boardService.searchPosts(keyword);
+        model.addAttribute("boardList",boardDtos);
+
+        return "board/list";
+    }
+
 }

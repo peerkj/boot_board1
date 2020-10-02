@@ -66,4 +66,29 @@ public class BoardService implements BoardServiceInter {
     public void deletePost(Long id) {
         boardRepository.deleteById(id);
     }
+
+    @Override
+    @Transactional
+    public List<BoardDto> searchPosts(String keyword) {
+        List<Board> boards=boardRepository.findByTitleContaining(keyword);
+        List<BoardDto> boardDtoList=new ArrayList<>();
+
+        if(boards.isEmpty()) return boardDtoList;
+
+        for(Board b : boards){
+            boardDtoList.add(this.convertEntityToDto(b));
+        }
+        return boardDtoList;
+    }
+
+    @Override
+    public BoardDto convertEntityToDto(Board board) {
+        return BoardDto.builder()
+                .id(board.getId())
+                .title(board.getTitle())
+                .content(board.getContent())
+                .writer(board.getWriter())
+                .createdDate(board.getCreatedDate())
+                .build();
+    }
 }
