@@ -4,22 +4,27 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <link rel="stylesheet" th:href="@{/css/board.css}">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.css}">
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+    <!--    <link rel="stylesheet" th:href="@{/css/board.css}">-->
 </head>
 <body>
 <!-- header 추가 -->
+
 <div th:insert="common/header.html" id="header"></div>
-<div id="wrap">
-    <a th:href="@{/post}">글쓰기</a>
+<br><br>
+<div id="wrap" style="margin: 35px">
 
-    <form action="/board/search" method="GET">
-        <div class="search">
-            <input name="keyword" type="text" placeholder="검색어를 입력해주세요">
+
+    <form action="/board/search" method="GET" class="form-inline">
+        <div class="search form-group" style="width: 100%;margin-bottom: 20px">
+            <input style="width:93%" name="keyword" type="text" placeholder="글제목을 입력해주세요" class="form-control">
+            <button style="margin-left: 1%" class="btn btn-primary">검색</button>
         </div>
-
-        <button>검색하기</button>
     </form>
-    <table>
+
+
+    <table class="table table-hover">
         <thead>
         <tr>
             <th class="one wide">번호</th>
@@ -48,16 +53,28 @@
             </td>
         </tr>
         </tbody>
+
     </table>
 
-    <div>
-    <span th:each="pageNum : ${pageList}" th:inline="text">
-        <a th:href="@{'/?page=' + ${pageNum}}">[[${pageNum}]]</a>
-    </span>
+
+    <div style="float: right">
+        <button class="btn btn-primary" onclick="location.href='/post'">
+            글쓰기
+            <!--        <a th:href="@{/post}"></a>-->
+        </button>
     </div>
+
+    <div class="row" style="justify-content: center;">
+        <ul class="pagination" th:each="pageNum : ${pageList}" th:inline="text">
+        <li class="page-item" th:if="${pageNum!=null}">
+            <a class="page-link" th:href="@{'/?page=' + ${pageNum}}">[[${pageNum}]]</a>
+        </li>
+        </ul>
+    </div>
+
+
+
 </div>
 
-<!-- footer 추가 -->
-<div th:insert="common/footer.html" id="footer"></div>
 </body>
 </html>
