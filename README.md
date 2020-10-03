@@ -1,6 +1,21 @@
-spring boot+jpa 게시판
+Spring Boot + JPA 
 
 
+개발환경
+
+IDEA : IntelliJ
+
+Java:11
+
+Spring Boot
+
+Gradle
+
+docker - mysql 사용
+
+
+CRUD게시판 + 페이징처리 
+![image](https://user-images.githubusercontent.com/55247645/94984762-9813eb00-058a-11eb-8ac8-bed5601a8a17.png)
 
 
 참조
